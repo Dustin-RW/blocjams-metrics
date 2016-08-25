@@ -34,7 +34,7 @@ body.landing {
     position: relative;
     padding: 2rem;
     text-align: center;
-    opacity: 0; /*value 0.0 - 1.0 for transparency*/
+    opacity: 1; /*value 0.0 - 1.0 for transparency*/
     /* transform changes the scaling of the class, Xaxis and Yaxis */
     -webkit-transform: scaleX(0.9) translateY(3rem);
     -moz-transform: scaleX(0.9) translateY(3rem);
