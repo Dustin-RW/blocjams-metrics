@@ -1,12 +1,12 @@
 (function() {
-    function SongPlayer() {
+    function SongPlayer(Fixtures) {
         var SongPlayer = {};
 
         /**
-        * @desc Song row object
+        * @desc grabs Album object from Fixtures
         * @type {Object}
         */
-        var currentSong = null;
+        var currentAlbum = Fixtures.getAlbum();
 
         /**
          * @desc Buzz object audio file
@@ -22,7 +22,7 @@
         var setSong = function(song) {
             if (currentBuzzObject) {
                 currentBuzzObject.stop();
-                currentSong.playing = null;
+                SongPlayer.currentSong.playing = null;
             }
 
             currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -30,7 +30,7 @@
                 preload: true
             });
 
-            currentSong = song;
+            SongPlayer.currentSong = song;
         };
 
         /**
@@ -44,20 +44,36 @@
         };
 
         /**
+        * @function .getSongIndex
+        * @desc returns the current song number
+        * @param {Object} song
+        */
+        var getSongIndex = function(song) {
+          return currentAlbum.songs.indexOf(song);
+        }
+
+        /**
+        * @desc Active song object from list of songs
+        * @type {Object}
+        */
+        SongPlayer.currentSong = null;
+
+        /**
          * @function .play
          * @desc plays new or paused song
          * @param {Object} song
          */
         SongPlayer.play = function(song) {
-            if (currentSong !== song) {
+            song = song || SongPlayer.currentSong;
+            if (SongPlayer.currentSong !== song) {
                 setSong(song);
                 playSong(song);
-            } else if (currentSong === song) {
+            } else if (SongPlayer.currentSong === song) {
                 if (currentBuzzObject.isPaused()) {
                     currentBuzzObject.play();
                 }
             }
-
+            console.log(song);
             playSong(song);
         };
 
@@ -67,9 +83,28 @@
          * @param {Object} song
          */
         SongPlayer.pause = function(song) {
+            song = song || SongPlayer.currentSong;
             currentBuzzObject.pause();
             song.playing = false;
         }
+
+        /**
+        * @function .previous
+        * @desc changes current song being played by subtracting 1
+        */
+        SongPlayer.previous = function() {
+          var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+          currentSongIndex--;
+
+          if (currentSongIndex < 0) {
+            currentBuzzObject.stop();
+            SongPlayer.currentSong.playing = null
+          } else {
+            var song = currentAlbum.songs[currentSongIndex];
+            setSong(song);
+            playSong(song);
+          }
+        };
 
         return SongPlayer;
     }
