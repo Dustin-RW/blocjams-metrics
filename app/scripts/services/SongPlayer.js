@@ -13,6 +13,14 @@
          * @type {Object}
          */
         var currentBuzzObject = null;
+        // var currentBuzzObject = {
+        //   isPaused: function() {
+        //     return false;
+        //   },
+        //   play: function() {
+        //     playSong(currentAlbum.songs[0]);
+        //   }
+        // };
 
         /**
          * @function setSong
@@ -31,6 +39,8 @@
 
             SongPlayer.currentSong = song;
         };
+
+
 
         /**
          * @function playSong
@@ -66,6 +76,7 @@
         * @type {Object}
         */
         SongPlayer.currentSong = null;
+
 
         /**
          * @function .play
