@@ -13,13 +13,23 @@
       templateUrl: '/templates/directives/seek_bar.html', //specifies a URL from which the directive will load a template
       replace: true, //specifies what the template should replace.  If "true," the template replaces the directives element.  If "false," the template replaces the content of the direcgives element
       restrict: 'E', //Restricts the directive to a specefic declaration style (ie element = 'E')
-      scope: { }, //specifies that a new scope be create for the directive
+      scope: { //specifies that a new scope be create for the directive
+        onChange: '&' //'&' = type of directive scope binding. (The 3 types are @, =, and &)
+      },
       link: function(scope, element, attributes) { //link: responsible for the registering DOM listeners and updating the DOM.  This is where we put most of our directive logic
         //directives here
         scope.value = 0;
         scope.max = 100;
 
         var seekBar = $(element);
+
+        attributes.$observe('value', function(newValue) {
+          scope.value = newValue;
+        })
+
+        attributes.$observe('max', function(newValue) {
+          scope.max = newValue
+        });
 
         var percentString = function() {
           var value = scope.value;
@@ -39,6 +49,7 @@
         scope.onClickSeekBar = function(event) {
           var percent = calculatePercent(seekBar, event);
           scope.value = percent * scope.max;
+          notifyOnChange(scope.value);
         };
 
         scope.trackThumb = function() {
@@ -46,11 +57,18 @@
             var percent = calculatePercent(seekBar, event);
             scope.$apply(function() {  //$apply constantly applys the change in value of scope.value as the user drags the seek bar thumb
               scope.value = percent * scope.max;
+              notifyOnChange(scope.value);
             });
 
             $document.unbind('mousemove.thumb');
             $document.unbind('mouseup.thumb');
           });
+        };
+
+        var notifyOnChange = function(newValue) {
+          if (typeof scope.onChange === 'function') { //If a future developer fails to pass a function to the on-change attribute in the HTML, the next line will not be reached, and no error will be thrown
+            scope.onChange({value: newValue}); //scope.onChange() calls the function in the attribute.  We pass the HTML argument 'value'.
+          }
         };
       }
     };
