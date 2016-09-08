@@ -29,7 +29,7 @@
                  <div class="total-time" ng-show="playerBar.songPlayer.currentSong.playing">{{ playerBar.songPlayer.currentSong.duration }}</div>
 =======
                  <seek-bar value="{{ playerBar.songPlayer.currentTime }}" max=" {{ playerBar.songPlayer.currentSong.duration }}" on-change="playBar.songPlayer.setCurrentTime(value)"></seek-bar>
-                 <div class="current-time">{{ playerBar.songPlayer.currentTime | timecode}}</div>
+                 <div class="current-time">{{ playerBar.songPlayer.currentTime | timecode }}</div>
                  <div class="total-time" ng-show="playerBar.songPlayer.currentSong.playing">{{ playerBar.songPlayer.currentSong.duration | timecode }}</div>
 >>>>>>> filter-checkpoint
              </div>
