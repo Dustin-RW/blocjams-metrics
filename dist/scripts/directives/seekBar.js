@@ -11,7 +11,7 @@
 
     return {
       templateUrl: '/templates/directives/seek_bar.html', //specifies a URL from which the directive will load a template
-      replace: true, //specifies what the template should replace.  If "true," the template replaces the directives element.  If "false," the template replaces the content of the direcgives element
+      replace: true, //specifies what the template should replace.  If "true," the template replaces the directives element.  If "false," the template replaces the content of the directives element
       restrict: 'E', //Restricts the directive to a specefic declaration style (ie element = 'E')
       scope: { //specifies that a new scope be create for the directive
         onChange: '&' //'&' = type of directive scope binding. (The 3 types are @, =, and &)
@@ -21,7 +21,7 @@
         scope.value = 0;
         scope.max = 100;
 
-        var seekBar = $(element);
+        var seekBar = $(element); //holds the element that matches the directive as a jQuery object so we can call jQuery methods on it
 
         attributes.$observe('value', function(newValue) {
           scope.value = newValue;
@@ -50,6 +50,7 @@
           var percent = calculatePercent(seekBar, event);
           scope.value = percent * scope.max;
           notifyOnChange(scope.value);
+          console.log("onClickSeekBar click = " + scope.value);
         };
 
         scope.trackThumb = function() {
