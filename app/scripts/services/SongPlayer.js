@@ -170,13 +170,17 @@
         * @desc Current volume set to null (volume will be 0 to 100)
         * @type number
         */
-        SongPlayer.volume = 40;
+        SongPlayer.volume = null;
 
-        SongPlayer.setVolume = function(value) {
-          if (currentBuzzObject) {
-            SongPlayer.volume = currentBuzzObject.setVolume(value);
-            console.log(SongPlayer.volume);
-          }
+        // SongPlayer.setVolume = function(value) {
+        //   if (currentBuzzObject) {
+        //     SongPlayer.volume = currentBuzzObject.setVolume(value);
+        //     console.log(SongPlayer.volume);
+        //   }
+        // };
+
+        SongPlayer.setVolume = function(volume) {
+            SongPlayer.volume = currentBuzzObject.setVolume(volume);
         };
 
         return SongPlayer;
