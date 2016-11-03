@@ -2,25 +2,10 @@
     function SongPlayer($rootScope, Fixtures) {
         var SongPlayer = {};
 
-        /**
-        * @desc grabs Album object from Fixtures
-        * @type {Object}
-        */
         var currentAlbum = Fixtures.getAlbum();
 
-        /**
-         * @desc Buzz object audio file
-         * @type {Object}
-         */
         var currentBuzzObject = null;
-        // var currentBuzzObject = {
-        //   isPaused: function() {
-        //     return false;
-        //   },
-        //   play: function() {
-        //     playSong(currentAlbum.songs[0]);
-        //   }
-        // };
+
 
         /**
          * @function setSong
@@ -40,7 +25,6 @@
             currentBuzzObject.bind('timeupdate', function() {
               $rootScope.$apply(function() {
                 SongPlayer.currentTime = currentBuzzObject.getTime();
-
               });
             });
 
@@ -172,12 +156,6 @@
         */
         SongPlayer.volume = null;
 
-        // SongPlayer.setVolume = function(value) {
-        //   if (currentBuzzObject) {
-        //     SongPlayer.volume = currentBuzzObject.setVolume(value);
-        //     console.log(SongPlayer.volume);
-        //   }
-        // };
 
         SongPlayer.setVolume = function(volume) {
             SongPlayer.volume = currentBuzzObject.setVolume(volume);
