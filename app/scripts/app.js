@@ -23,12 +23,17 @@
                 url: '/collection',
                 controller: 'CollectionCtrl as collection',
                 templateUrl: '/templates/collection.html'
+            })
+            .state('event', {
+              url: '/event',
+              controller: 'EventCtrl as event',
+              templateUrl: '/templates/event.html'
             });
       }
 
 
 
     angular
-        .module('blocJams', ['ui.router'])
+        .module('blocJams', ['nvd3', 'ui.router'])
         .config(config);
 })();

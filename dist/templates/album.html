@@ -9,6 +9,7 @@
             <h5 class="album-view-release-info">{{ album.albumData.year }} {{ album.albumData.label }}</h5>
         </div>
     </section>
+    <h3 ng-hide="album.metric.listSongsPlayed().length === 0" style="text-align: center"><a href="/event">Data for Songs</a></h3>
     <table class="album-view-song-list">
         <tr class="album-view-song-item" ng-repeat="song in album.albumData.songs" ng-mouseover="hovered = true" ng-mouseleave="hovered = false">
             <td class="song-item-number">
