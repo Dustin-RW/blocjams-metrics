@@ -1,5 +1,5 @@
 # Blocjams-metrics
-An extension for [Bloc-jams-angukar](https://github.com/FrozenMeatloaf/bloc-jams-angular) project.  Extension is n analytics service and reporting tool using the D3.js visualization library.
+An extension for [Bloc-jams-angular](https://github.com/FrozenMeatloaf/bloc-jams-angular) project.  Extension is an analytics service and reporting tool using the D3.js visualization library.
 
 ## information
 
